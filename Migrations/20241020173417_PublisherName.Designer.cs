@@ -4,6 +4,7 @@ using Ioniță_Maria_Isabela_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ioniță_Maria_Isabela_Lab2.Migrations
 {
     [DbContext(typeof(Ioniță_Maria_Isabela_Lab2Context))]
-    partial class Ioniță_Maria_Isabela_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20241020173417_PublisherName")]
+    partial class PublisherName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,27 +24,6 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Ioniță_Maria_Isabela_Lab2.Models.Author", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Author");
-                });
 
             modelBuilder.Entity("Ioniță_Maria_Isabela_Lab2.Models.Book", b =>
                 {
@@ -51,8 +33,9 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("AuthorID")
-                        .HasColumnType("int");
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6, 2)");
@@ -68,8 +51,6 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
@@ -95,22 +76,11 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
 
             modelBuilder.Entity("Ioniță_Maria_Isabela_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("Ioniță_Maria_Isabela_Lab2.Models.Author", "Author")
-                        .WithMany("Books")
-                        .HasForeignKey("AuthorID");
-
                     b.HasOne("Ioniță_Maria_Isabela_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
-                    b.Navigation("Author");
-
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("Ioniță_Maria_Isabela_Lab2.Models.Author", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Ioniță_Maria_Isabela_Lab2.Models.Publisher", b =>
