@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Nume_Pren_Lab2.Data;
+using Ioniță_Maria_Isabela_Lab2.Data;
 
 
 namespace Ioniță_Maria_Isabela_Lab2.Models
@@ -7,7 +7,7 @@ namespace Ioniță_Maria_Isabela_Lab2.Models
     public class BookCategoriesPageModel : PageModel
     {
         public List<AssignedCategoryData> AssignedCategoryDataList;
-        public void PopulateAssignedCategoryData(Nume_Pren_Lab2Context context,
+        public void PopulateAssignedCategoryData(Ioniță_Maria_Isabela_Lab2Context context,
         Book book)
         {
             var allCategories = context.Category;
@@ -24,7 +24,7 @@ namespace Ioniță_Maria_Isabela_Lab2.Models
                 });
             }
         }
-        public void UpdateBookCategories(Nume_Pren_Lab2Context context,
+        public void UpdateBookCategories(Ioniță_Maria_Isabela_Lab2Context context,
         string[] selectedCategories, Book bookToUpdate)
         {
             if (selectedCategories == null)

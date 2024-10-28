@@ -40,8 +40,7 @@ namespace Ioniță_Maria_Isabela_Lab2.Pages.Books
             {
                 return NotFound();
             }
-            Book = book;
-            PopulateAssignedCategoryData(_context, Book);
+PopulateAssignedCategoryData(_context, Book);
             var authorList = _context.Author.Select(x => new
             {
                 x.ID,
@@ -51,8 +50,6 @@ namespace Ioniță_Maria_Isabela_Lab2.Pages.Books
 "PublisherName");
             ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
 "FirstName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
-"LastName");
             return Page();
         }
 
@@ -76,6 +73,8 @@ namespace Ioniță_Maria_Isabela_Lab2.Pages.Books
                 {
                     return NotFound();
                 }
+
+
                 if (await TryUpdateModelAsync<Book>(
                      bookToUpdate,
                      "Book",
