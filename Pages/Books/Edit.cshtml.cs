@@ -50,6 +50,8 @@ PopulateAssignedCategoryData(_context, Book);
 "PublisherName");
             ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
 "FirstName");
+            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
+"LastName");
             return Page();
         }
 
