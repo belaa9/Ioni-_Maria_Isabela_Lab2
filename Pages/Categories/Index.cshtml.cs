@@ -25,21 +25,27 @@ namespace Ioniță_Maria_Isabela_Lab2.Pages.Categories
         public CategoryIndexData CategoryData { get; set; }
         public int CategoryID { get; set; }
         public int BookID { get; set; }
+        public List<Book> AllBooks { get; set; } = new List<Book>();
         public async Task OnGetAsync(int? id, int? bookID)
         {
             CategoryData = new CategoryIndexData();
             CategoryData.Categories = await _context.Category
             .Include(i => i.BookCategories)
-            .ThenInclude(c => c.Author)
             .ThenInclude(i => i.Book)
+            .ThenInclude(c => c.Author)
             .OrderBy(i => i.CategoryName)
             .ToListAsync();
+
+            AllBooks = await _context.Book
+            .Include(b => b.Author)
+            .ToListAsync();
+
             if (id != null)
             {
                 CategoryID = id.Value;
-                var category = CategoryData.Categories
+                Category category = CategoryData.Categories
                 .Where(i => i.ID == id.Value).Single();
-                CategoryData.Books = category.BookCategories.Select(c => c.Book);
+                CategoryData.Books = category.BookCategories.Select(b => b.Book).ToList();
             }
         }
 

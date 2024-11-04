@@ -4,6 +4,7 @@ using Ioniță_Maria_Isabela_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ioniță_Maria_Isabela_Lab2.Migrations
 {
     [DbContext(typeof(Ioniță_Maria_Isabela_Lab2Context))]
-    partial class Ioniță_Maria_Isabela_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20241104124126_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,10 +87,15 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ID")
                         .HasColumnType("int");
 
                     b.HasKey("BookID", "CategoryID");
+
+                    b.HasIndex("AuthorID");
 
                     b.HasIndex("CategoryID");
 
@@ -145,6 +153,12 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
 
             modelBuilder.Entity("Ioniță_Maria_Isabela_Lab2.Models.BookCategory", b =>
                 {
+                    b.HasOne("Ioniță_Maria_Isabela_Lab2.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Ioniță_Maria_Isabela_Lab2.Models.Book", "Book")
                         .WithMany("BookCategories")
                         .HasForeignKey("BookID")
@@ -156,6 +170,8 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Book");
 

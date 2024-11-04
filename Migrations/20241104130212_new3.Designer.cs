@@ -4,6 +4,7 @@ using Ioniță_Maria_Isabela_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ioniță_Maria_Isabela_Lab2.Migrations
 {
     [DbContext(typeof(Ioniță_Maria_Isabela_Lab2Context))]
-    partial class Ioniță_Maria_Isabela_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20241104130212_new3")]
+    partial class new3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,9 +85,6 @@ namespace Ioniță_Maria_Isabela_Lab2.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ID")
                         .HasColumnType("int");
 
                     b.HasKey("BookID", "CategoryID");
