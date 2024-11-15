@@ -7,6 +7,8 @@ namespace Ioniță_Maria_Isabela_Lab2.Models
     {
         public int ID { get; set; }
         [Display(Name = "Book Title")]
+        [Required(ErrorMessage = "The title of the book is required.")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "The title must be between 3 and 150 characters.")]
         public string Title { get; set; }
 
         public int? AuthorID { get; set; }
